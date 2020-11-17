@@ -17,20 +17,16 @@ def clean_column_names(cols):
 
 def set_types_fillna(df1, cols):
 #     can handle str, float, int, bool, datetime
-    
     for col, spec in cols.items():
         data_type = spec.get("data_type")
-        if data_type == 'str':
-            df1[col] = df1[col].fillna(spec.get("default")).astype(spec.get("data_type"))
-        elif data_type in ['int', 'float']:
-            df1[col] = df1[col].str.extract('(\d+)')
-            df1[col] = df1[col].fillna(int(spec.get("default")))
-            df1[col] = pandas.to_numeric(df1[col], errors="coerce")
-        elif data_type == "datetime":
+        default = spec.get("default")
+        if data_type == "datetime":
             df1[col] = pandas.to_datetime(df1[col], errors='coerce')
-        else:
-            df1[col] = df1[col].astype(spec.get("data_type")).fillna(spec.get("default"))
-            
+        if data_type in ['int', 'float']:
+            df1[col] = pandas.to_numeric(df1[col], errors='coerce')
+            df1[col] = df1[col].fillna(default).astype(data_type)
+        if data_type == "str":
+            df1[col] = df1[col].fillna(default).astype(data_type)
     return df1
 
 def save_xls(dict_df, path):
@@ -44,7 +40,7 @@ def save_xls(dict_df, path):
     writer.save()
 
 def generate_diff(df1, df2):
-    df_all = pandas.concat([df1, df2], axis='columns', keys=['First', 'Second'])
+    df_all = pandas.concat([df1, df2], axis='columns', keys=['Input', 'Output'])
     df_final = df_all.swaplevel(axis='columns')[df1.columns[:]]
 
     def highlight_diff(data, color='yellow'):

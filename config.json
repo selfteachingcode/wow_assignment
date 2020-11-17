@@ -18,8 +18,52 @@
                             "DATE":{
                                 "data_type": "datetime",
                                 "default": "current"
+                            },
+                            "AGE":{
+                                "data_type":"float",
+                                "default": "0"
+                            },
+                            "COUNTRY_TEST":{
+                                "data_type":"str",
+                                "default":"NA"
+                            },
+                            "ID":{
+                                "data_type": "int",
+                                "default": "0"
                             }
                     }
+       },
+       "Sheet2": {
+        "columns":{
+                "FIRST_NAME":{
+                    "data_type":"str",
+                    "default":"default"
+                },
+                "LAST_NAME":{
+                    "data_type": "str",
+                    "default": "default"
+                },
+                "GENDER_SUDS":{
+                    "data_type":"str",
+                    "default": "NA"
+                },
+                "DATE":{
+                    "data_type": "datetime",
+                    "default": "current"
+                },
+                "AGE":{
+                    "data_type":"int",
+                    "default": "0"
+                },
+                "COUNTRY":{
+                    "data_type":"str",
+                    "default":"NA"
+                },
+                "ID":{
+                    "data_type": "int",
+                    "default": "0"
+                }
+        }
        }
     }
 
