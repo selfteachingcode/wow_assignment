@@ -29,13 +29,13 @@ def set_types_fillna(df1, cols):
             df1[col] = df1[col].fillna(default).astype(data_type)
     return df1
 
-def save_xls(dict_df, path):
+def save_xls(dict_df, path, index=False):
     """
     Save a dictionary of dataframes to an excel file, with each dataframe as a seperate page
     """
     writer = ExcelWriter(path)
     for key in dict_df:
-        dict_df[key].to_excel(writer, key, index=False)
+        dict_df[key].to_excel(writer, key, index=index)
 
     writer.save()
 
@@ -45,7 +45,7 @@ def generate_diff(df1, df2):
 
     def highlight_diff(data, color='yellow'):
         attr = 'background-color: {}'.format(color)
-        other = data.xs('First', axis='columns', level=-1)
+        other = data.xs('Input', axis='columns', level=-1)
         return pandas.DataFrame(numpy.where(data.ne(other, level=0), attr, ''),
                             index=data.index, columns=data.columns)
 
@@ -80,7 +80,9 @@ if __name__ == "__main__":
             for sheet_name, conf_cols in sheets.items():
                 df_out, df_diff = pipeline(filename, sheet_name, xls, conf_cols)
                 df_dict[sheet_name] = df_out
+                df_diff_dic[sheet] = df_diff
             save_xls(df_dict, os.path.join(path, filename.split('.')[0] + "_output.xlsx"))
+            save_xls(df_diff_dic, os.path.join(path, filename.split('.')[0] + "_diff.xlsx"), True)
         
         except Exception as e:
             status = False
