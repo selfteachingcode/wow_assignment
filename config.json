@@ -10,43 +10,15 @@
                             "LAST_NAME_DDDD":{
                                 "data_type": "str",
                                 "default": "default"
-                            }
-                    }
-       }
-    }
-
-},
-{
-    "filename":"sample_error.xlsx",
-    "sheet_names":{
-       "Sheet1": {
-                    "columns":{
-                            "FIRST_NAME":{
-                                "data_type":"str",
-                                "default":"default"
                             },
-                            "LAST_NAME_DDDD":{
-                                "data_type": "str",
-                                "default": "default"
-                            }
-                    }
-       }
-    }
-
-},
-{
-    "filename":"sample_error.xlsx",
-    "sheet_names":{
-       "Sheet1": {
-                    "columns":{
+                            "GENDER":{
+                                "data_type":"str",
+                                "default": "NA"
+                            },
                             "DATE":{
-                                "data_type":"datetime",
-                                "default":"default"
+                                "data_type": "datetime",
+                                "default": "current"
                             }
-                            // "LAST_NAME_DDDD":{
-                            //     "data_type": "str",
-                            //     "default": "default"
-                            // }
                     }
        }
     }
